@@ -1,20 +1,33 @@
 import React, { Children } from 'react';
 import Head from 'next/head';
-import {AppBar, Container, Toolbar, Typography} from '@material-ui/core'
+import NextLink from 'next/link';
+import {AppBar, Container, Toolbar, Typography, Link} from '@material-ui/core'
 import useStyles from '../utilis/styles';
 
-export default function Layout({children}) {
+export default function Layout({ title, children }) {
     const classes = useStyles();
     
     return (
         <div>
             <Head>
-                <title>Next Ecommerce</title>
-
+                <title>{title ? `${title} - Next Ecommerce` : 'Next Ecommerce'}</title>
             </Head>
             <AppBar position="static" className={classes.navbar}>
                 <Toolbar>
-                    <Typography>ecommerce</Typography>
+                    <NextLink href="/" passHref>
+                        <Link>
+                           <Typography className={classes.brand}>Ecommerce</Typography>
+                        </Link>
+                    </NextLink>
+                    <div className={classes.grow}></div>
+                    <div>
+                        <NextLink href="/cart" passHref>
+                            <Link>Cart</Link>
+                        </NextLink>
+                        <NextLink href="/login" passHref>
+                            <Link>Login</Link>
+                        </NextLink>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Container className={classes.main}>
